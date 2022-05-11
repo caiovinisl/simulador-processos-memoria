@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+# Names our volume
+  web:
+    build:
+      context: ./  # 5
+      dockerfile: Dockerfile  # 6
+    command: bash -c "python3 main.py"
+    ports:
+      - "8000:8000"  # 7
+    volumes:
+      - ./:/backend  # binding mount one folder to the other
+
