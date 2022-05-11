@@ -1,0 +1,21 @@
+{
+    "config":{
+        "scale_algorithm": "FIFO",
+        "quantum": 2,
+        "overchage":2
+    },
+    "processes":[
+        {
+            "name":"1",
+            "arrival_time":2,
+            "execution_time":3,
+            "deadline":4
+        },
+        {
+            "name":"2",
+            "arrival_time":2,
+            "execution_time":3,
+            "deadline":4
+        }
+    ]
+}

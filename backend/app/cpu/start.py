@@ -1,8 +1,8 @@
 import json
 from typing import List
-from models import config_model
-from models import process
-from scalers.FIFO import fifo
+from cpu.models import config_model
+from cpu.models import process
+from cpu.scalers.FIFO import fifo
 from time import sleep
 
 scalonator_translate = {
@@ -12,30 +12,19 @@ scalonator_translate = {
 '''
 Para rodar este código tanto pelo docker quanto pelo debugger, por favor esteja na pasta backend/
 '''
-def start():
-    #Load configs and process
-    process_dict, config_dict = load_configs_and_process()
-    
-    process_list = process_factory(process_dict)
-    global config
-    config = config_model.ConfigIn(
-        scale_algorithm=config_dict["scale_algorithm"],
-        quantum=config_dict["quantum"],
-        overchage=config_dict["overchage"]
-    )
-    print(process_list)
-    print(config)
+def start(config, process_list:List[process.ProcessIn]):
 
-    global scalonator_engine
+    print("###########################")
+
+    print("INSIDE NEW SUB-PROCESS")
+
+    print("###########################")
+ 
+
     scalonator_engine =  scalonator_translate[config.scale_algorithm] 
     
-    global queue
     queue = scalonator_engine(process_list)
-    return queue
 
-
-
-def get_info():
     while queue:#Enquanto tiver algo na queue
         
         p = queue.pop() #Dentro do processador
@@ -46,7 +35,8 @@ def get_info():
                 break 
         
         if p.is_it_done():
-            logging.debug(INFO)
+            pass
+            # logging.debug(INFO)
         else:
             queue.append(p) 
             queue = scalonator_engine(queue)
