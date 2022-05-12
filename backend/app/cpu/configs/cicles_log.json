@@ -1,0 +1,24 @@
+{
+    "1": {
+        "what you need": {
+            "2": {
+                "name": "2",
+                "arrival_time": 2,
+                "execution_time": 2,
+                "deadline": 4,
+                "already_exec": 2
+            }
+        }
+    },
+    "2": {
+        "what you need": {
+            "1": {
+                "name": "1",
+                "arrival_time": 0,
+                "execution_time": 2,
+                "deadline": 4,
+                "already_exec": 2
+            }
+        }
+    }
+}

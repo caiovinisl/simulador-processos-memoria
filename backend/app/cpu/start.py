@@ -2,75 +2,69 @@ import json
 from typing import List
 from cpu.models import config_model
 from cpu.models import process
-from cpu.scalers.FIFO import fifo
+from cpu.configs.config import scalonator_translate,path,file_name
 from time import sleep
+from cpu.driver import json_driver
 
-scalonator_translate = {
-    "FIFO": fifo
-}
+#TODO: need cicle_data model
+#TODO: Need memory logic!
+#TODO: Need to comment code
 
-'''
-Para rodar este código tanto pelo docker quanto pelo debugger, por favor esteja na pasta backend/
-'''
-def start(config, process_list:List[process.ProcessIn]):
+
+def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
 
     print("###########################")
 
     print("INSIDE NEW SUB-PROCESS")
 
     print("###########################")
- 
 
     scalonator_engine =  scalonator_translate[config.scale_algorithm] 
     
-    queue = scalonator_engine(process_list)
+    queue: list[process.ProcessIn] = scalonator_engine(process_list)
+    print("Creates file")
+    json_driver.create_file(path=path,file_name=file_name)
+    cicle_id = 1
 
+    print("enters main loop!")
     while queue:#Enquanto tiver algo na queue
-        
         p = queue.pop() #Dentro do processador
-        for quantum in config.quantum:
+        for quantum in range(config.quantum):
             p.already_exec +=1
             sleep(1)
             if p.is_it_done():
+                print(f"process={p.name} its done!")
                 break 
-        
-        if p.is_it_done():
-            pass
-            # logging.debug(INFO)
-        else:
+        '''
+        FALTA A LOGICA DA MEMORIA
+        FALTA A LOGICA DA MEMORIA
+        FALTA A LOGICA DA MEMORIA
+        FALTA A LOGICA DA MEMORIA
+        FALTA A LOGICA DA MEMORIA
+        FALTA A LOGICA DA MEMORIA
+        '''
+        if not p.is_it_done():
             queue.append(p) 
             queue = scalonator_engine(queue)
-        
 
+        cicle_data = create_cicle_data(0,0,0,p)
 
+        json_driver.write(path,file_name,cicle_id,cicle_data=cicle_data)
+        cicle_id+=1
+
+            
+def create_cicle_data(take, arguments, here, process:process.ProcessIn) -> dict:
+    #do something with the arguments
+    p_dict = process.dict()
+    return {
+                "what you need":{
+                    process.name:p_dict
+                }
+            }
     
 
 
 
- 
-def load_configs_and_process():
-    '''
-    Uma rota deve enviar para esta função os jsons!
-    E assim que o programa começa!
-    '''
-    with open("app/cpu/configs/process_file.json",'r') as file: #for docker
-        process_dict = json.load(file)
-    with open("app/cpu/configs/config_file.json",'r') as file: #on local debug
-        config_dict = json.load(file)
-    return (process_dict, config_dict)
-
-def process_factory(process_dict:dict)-> List[process.ProcessIn]:
-    process_list = []
-    
-    for k,v in process_dict.items():
-        p=process.ProcessIn(
-            name=v["name"],
-            arrival_time=v["arrival_time"],
-            execution_time=v["execution_time"],
-            deadline=v["deadline"]
-        )
-        process_list.append(p)
-    return process_list
 
 if __name__ =="__main__":
     start()
