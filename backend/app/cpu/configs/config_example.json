@@ -2,20 +2,34 @@
     "config":{
         "scale_algorithm": "FIFO",
         "quantum": 2,
-        "overchage":2
+        "overhead":0
     },
     "processes":[
+       
+        
         {
-            "name":"1",
-            "arrival_time":2,
+            "name":"D",
+            "arrival_time":6,
             "execution_time":3,
-            "deadline":4
+            "deadline":10
         },
         {
-            "name":"2",
+            "name":"C",
+            "arrival_time":4,
+            "execution_time":1,
+            "deadline":8
+        },
+        {
+            "name":"B",
             "arrival_time":2,
-            "execution_time":3,
-            "deadline":4
+            "execution_time":2,
+            "deadline":5
+        },
+        {
+            "name":"A",
+            "arrival_time":0,
+            "execution_time":4,
+            "deadline":7
         }
     ]
 }

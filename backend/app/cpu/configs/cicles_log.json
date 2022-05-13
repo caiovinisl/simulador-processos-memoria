@@ -1,46 +1,114 @@
 {
     "1": {
-        "what you need": {
-            "2": {
-                "name": "2",
-                "arrival_time": 2,
-                "execution_time": 3,
-                "deadline": 4,
+        "process": {
+            "A": {
+                "name": "A",
+                "arrival_time": 0,
+                "execution_time": 4,
+                "deadline": 7,
                 "already_exec": 2
             }
-        }
+        },
+        "quantum": 2,
+        "overhead": 1,
+        "next_processess": [
+            "D",
+            "C",
+            "B",
+            "A"
+        ],
+        "done_in_this_cicle": false,
+        "time": 2
     },
     "2": {
-        "what you need": {
-            "2": {
-                "name": "2",
-                "arrival_time": 2,
-                "execution_time": 3,
-                "deadline": 4,
-                "already_exec": 3
+        "process": {
+            "A": {
+                "name": "A",
+                "arrival_time": 0,
+                "execution_time": 4,
+                "deadline": 7,
+                "already_exec": 4
             }
-        }
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "D",
+            "C",
+            "B"
+        ],
+        "done_in_this_cicle": true,
+        "time": 4
     },
     "3": {
-        "what you need": {
-            "1": {
-                "name": "1",
+        "process": {
+            "B": {
+                "name": "B",
                 "arrival_time": 2,
-                "execution_time": 3,
-                "deadline": 4,
+                "execution_time": 2,
+                "deadline": 5,
                 "already_exec": 2
             }
-        }
+        },
+        "quantum": 2,
+        "overhead": 1,
+        "next_processess": [
+            "D",
+            "C"
+        ],
+        "done_in_this_cicle": true,
+        "time": 7
     },
     "4": {
-        "what you need": {
-            "1": {
-                "name": "1",
-                "arrival_time": 2,
+        "process": {
+            "C": {
+                "name": "C",
+                "arrival_time": 4,
+                "execution_time": 1,
+                "deadline": 8,
+                "already_exec": 1
+            }
+        },
+        "quantum": 1,
+        "overhead": 1,
+        "next_processess": [
+            "D"
+        ],
+        "done_in_this_cicle": true,
+        "time": 9
+    },
+    "5": {
+        "process": {
+            "D": {
+                "name": "D",
+                "arrival_time": 6,
                 "execution_time": 3,
-                "deadline": 4,
+                "deadline": 10,
+                "already_exec": 2
+            }
+        },
+        "quantum": 2,
+        "overhead": 1,
+        "next_processess": [
+            "D"
+        ],
+        "done_in_this_cicle": false,
+        "time": 12
+    },
+    "6": {
+        "process": {
+            "D": {
+                "name": "D",
+                "arrival_time": 6,
+                "execution_time": 3,
+                "deadline": 10,
                 "already_exec": 3
             }
-        }
+        },
+        "quantum": 1,
+        "overhead": 0,
+        "next_processess": [],
+        "done_in_this_cicle": true,
+        "time": 13
     }
 }

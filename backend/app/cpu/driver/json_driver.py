@@ -4,19 +4,19 @@ import json
 
 def create_file(path:str,file_name:str)-> None:
     with open(f"{path}/{file_name}",'w') as file:
-        print("criando arquivo")
+        # print("criando arquivo")
         json.dump({"1":0}, file, ensure_ascii=False, indent=4)
 
 
 def write(path:str,file_name:str, cicle_id:int, cicle_data:dict)-> None:
     
     with open(f"{path}/{file_name}",'r') as file:
-        print("lendo")
+        # print("lendo")
         old_json = json.load(file)
 
     with open(f"{path}/{file_name}",'w') as file:
-        print("writing")
-        print(f"old json {old_json}")
+        # print("writing")
+        # print(f"old json {old_json}")
         old_json[str(cicle_id)] = cicle_data
         json.dump(old_json, file, ensure_ascii=False, indent=4)
         

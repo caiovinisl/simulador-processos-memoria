@@ -24,7 +24,7 @@
     "config":{
         "scale_algorithm": "FIFO",
         "quantum": 2,
-        "overchage":2
+        "overhead":2
     },
     "processes":[
         {
