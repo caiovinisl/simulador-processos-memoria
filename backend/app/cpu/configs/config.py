@@ -6,3 +6,4 @@ scalonator_translate = {
 
 path = "cpu/configs"
 file_name = "cicles_log.json"
+turnover_file_name = "turnover.json"

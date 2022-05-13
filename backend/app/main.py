@@ -9,7 +9,7 @@ from cpu.models.config_model import ConfigIn
 from cpu.models.process import ProcessIn
 from cpu.start import start
 from cpu.driver import json_driver
-from cpu.configs.config import path,file_name
+from cpu.configs.config import path,file_name,turnover_file_name
 
 
 #From 3th
@@ -61,6 +61,20 @@ def get_cicle(cicle_id:int)->None:
 
     return cicle_data
 
+@app.get("/cicle/get/")
+def get_turnover():
+    turnover_0 =  json_driver.read_cicle_id(
+        path=path,
+        file_name=turnover_file_name,
+        cicle_id=0)
+    turnover_1 =  json_driver.read_cicle_id(
+        path=path,
+        file_name=turnover_file_name,
+        cicle_id=1)
+    return {
+        "turnover_mean": turnover_0,
+        "p_tat": turnover_1
+    }
 
 @app.delete("/cicle/delete/all")
 def delete_all_cicle():

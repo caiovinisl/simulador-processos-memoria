@@ -4,7 +4,7 @@ from typing import List, Tuple
 
 from cpu.models import config_model
 from cpu.models import process
-from cpu.configs.config import scalonator_translate,path,file_name
+from cpu.configs.config import scalonator_translate,path,file_name, turnover_file_name
 from cpu.driver import json_driver
 from time import sleep
 
@@ -88,9 +88,12 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
 
     print("Calculating mean turnover")
     print(f'tuple = {math_turnover_util}')
-    print(f'qt process = {len(process_list)}')
-    result = calculate_mean_turnover(math_turnover_util,len(process_list))
-    print(f'turnover = {result}')
+    turnover_result = calculate_mean_turnover(math_turnover_util,len(process_list))
+    json_driver.create_file(path=path,file_name=turnover_file_name)
+    json_driver.write(path,turnover_file_name,0,turnover_result)
+    json_driver.write(path,turnover_file_name,1,math_turnover_util)
+
+    print(f'turnover = {turnover_result}')
     print("Finish process")
 
 
@@ -104,9 +107,7 @@ def calculate_mean_turnover(
     for t in math_util:
         numerator += t[1] - t[2] #TurnarountTime - Arrival time
     turnover_result = numerator/denominator
-    turnover_file_name = "turnover"
-    json_driver.create_file(path=path,file_name=turnover_file_name)
-    json_driver.write(path,turnover_file_name,0,turnover_result)
+    
     return turnover_result
     
 
