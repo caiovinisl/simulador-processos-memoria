@@ -1,7 +1,7 @@
 from cpu.scalers.FIFO import fifo
 
 scalonator_translate = {
-    "FIFO": fifo
+    "FIFO": fifo,
 }
 
 path = "cpu/configs"

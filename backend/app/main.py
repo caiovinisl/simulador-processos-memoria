@@ -1,7 +1,7 @@
 
 #FastAPI
-from fastapi import FastAPI, Depends
 from multiprocessing import Process
+from fastapi import FastAPI, Depends
 from typing import List,Optional
 
 
@@ -29,7 +29,6 @@ def join_process():
     for p in list_process:
         p.join()
     return None
-
 
 
 @app.get("/")

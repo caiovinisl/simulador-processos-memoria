@@ -1,15 +1,22 @@
 import json
 from typing import List
+
+#DOCKER MOD
 from cpu.models import config_model
 from cpu.models import process
 from cpu.configs.config import scalonator_translate,path,file_name
-from time import sleep
 from cpu.driver import json_driver
+from time import sleep
 
+#DEBUG MODE
+# from driver import json_driver
+# from models import config_model
+# from models import process
+# from configs.config import scalonator_translate,path,file_name
 #TODO: need cicle_data model
 #TODO: Need memory logic!
 #TODO: Need to comment code
-
+#TODO: Overcharge
 
 def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
 
@@ -67,5 +74,23 @@ def create_cicle_data(take, arguments, here, process:process.ProcessIn) -> dict:
 
 
 if __name__ =="__main__":
-    start()
+    config=config_model.ConfigIn(
+        scale_algorithm="FIFO",
+        quantum=2,
+        overchage=0
+    )
+    p1 = process.ProcessIn(
+        name="1",
+        arrival_time=0,
+        execution_time=2,
+        deadline=0
+    )
+    p2 = process.ProcessIn(
+        name="2",
+        arrival_time=0,
+        execution_time=1,
+        deadline=0
+    ) 
+    process_list = [p1,p2]
+    start(config, process_list)
     print()
