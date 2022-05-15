@@ -6,11 +6,12 @@
                 "arrival_time": 0,
                 "execution_time": 4,
                 "deadline": 7,
+                "pages": 10,
                 "already_exec": 2
             }
         },
         "quantum": 2,
-        "overhead": 1,
+        "overhead": 0,
         "next_processess": [
             "D",
             "C",
@@ -27,6 +28,7 @@
                 "arrival_time": 0,
                 "execution_time": 4,
                 "deadline": 7,
+                "pages": 10,
                 "already_exec": 4
             }
         },
@@ -47,11 +49,12 @@
                 "arrival_time": 2,
                 "execution_time": 2,
                 "deadline": 5,
+                "pages": 10,
                 "already_exec": 2
             }
         },
         "quantum": 2,
-        "overhead": 1,
+        "overhead": 0,
         "next_processess": [
             "D",
             "C"
@@ -66,11 +69,12 @@
                 "arrival_time": 4,
                 "execution_time": 1,
                 "deadline": 8,
+                "pages": 10,
                 "already_exec": 1
             }
         },
         "quantum": 1,
-        "overhead": 1,
+        "overhead": 0,
         "next_processess": [
             "D"
         ],
@@ -84,11 +88,12 @@
                 "arrival_time": 6,
                 "execution_time": 3,
                 "deadline": 10,
+                "pages": 10,
                 "already_exec": 2
             }
         },
         "quantum": 2,
-        "overhead": 1,
+        "overhead": 0,
         "next_processess": [
             "D"
         ],
@@ -102,6 +107,7 @@
                 "arrival_time": 6,
                 "execution_time": 3,
                 "deadline": 10,
+                "pages": 10,
                 "already_exec": 3
             }
         },

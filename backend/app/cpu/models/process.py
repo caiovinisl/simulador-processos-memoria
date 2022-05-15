@@ -1,4 +1,5 @@
-from pydantic import BaseModel
+from dataclasses import Field
+from pydantic import BaseModel, Field
 from typing import Optional
 
 class ProcessIn(BaseModel):
@@ -6,6 +7,7 @@ class ProcessIn(BaseModel):
     arrival_time:int
     execution_time:int
     deadline:int
+    pages:int = Field(lt=11)
     already_exec:Optional[int] = 0
 
     def is_it_done(self):

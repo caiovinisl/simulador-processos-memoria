@@ -11,24 +11,28 @@
             "name":"D",
             "arrival_time":6,
             "execution_time":3,
+            "pages":10,
             "deadline":10
         },
         {
             "name":"C",
             "arrival_time":4,
             "execution_time":1,
+            "pages":10,
             "deadline":8
         },
         {
             "name":"B",
             "arrival_time":2,
             "execution_time":2,
+            "pages":10,
             "deadline":5
         },
         {
             "name":"A",
             "arrival_time":0,
             "execution_time":4,
+            "pages":10,
             "deadline":7
         }
     ]
