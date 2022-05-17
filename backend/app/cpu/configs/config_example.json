@@ -1,6 +1,7 @@
 {
     "config":{
         "scale_algorithm": "FIFO",
+        "page_algorithm": "FIFO",
         "quantum": 2,
         "overhead":0
     },

@@ -1,11 +1,16 @@
 from distutils.command.build_scripts import first_line_re
 import json
 from typing import List, Tuple
+from collections import deque
 
 from cpu.models import config_model
 from cpu.models import process
 from cpu.configs.config import scalonator_translate,path,file_name, turnover_file_name
 from cpu.driver import json_driver
+from cpu.memory.memory_real import MemoryReal
+from cpu.memory.memory_virtual import MemoryVirtual
+from cpu.memory.mmu import MMU
+
 from time import sleep
 
 #TODO: need cicle_data model
@@ -23,8 +28,13 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
 
     scalonator_engine =  scalonator_translate[config.scale_algorithm] 
     
-    queue: list[process.ProcessIn] = scalonator_engine(process_list)
+    queue: deque[process.ProcessIn] = scalonator_engine(process_list)
     json_driver.create_file(path=path,file_name=file_name)
+
+    real_memory = MemoryReal(total_memory_pages=50)
+    virtual_memory = MemoryVirtual(total_memory_frames=100)
+    mmu = MMU(real_memory,virtual_memory)
+    MMU.initialize(queue)
 
     # main-loop variables
     cicle_id = 1
@@ -38,15 +48,14 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
     first = True
     print("enters main loop!")
 
-    while queue:#Enquanto tiver algo na queue
+    while  len(queue) != 0:#Enquanto tiver algo na queue
 
         p = queue.pop() #Dentro do processador
-        if p.name != cache_name: #Caso o process não esteja carregado na memoria
-            # load_context MMU()
+        if p.name != cache_name: #Caso o process não esteja carregado na cache
+            result = MMU.load_context(p)
             
             is_overhead = True
             if not first:
-                first = False
                 sleep(overhead)
                 time_count+=1
             first = False
@@ -70,8 +79,8 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
         #Fora do processador
         
         if not p.is_it_done():
-            queue.append(p) 
-            queue = scalonator_engine(queue)
+            queue.appendleft(p) 
+            queue: deque = scalonator_engine(list(queue))
 
         cicle_data = create_cicle_data(
             0,0,
@@ -120,7 +129,7 @@ def create_cicle_data(
     is_overhead:bool,
     overhead:int,
     is_process_done:bool,
-    queue:List[process.ProcessIn],
+    queue:deque[process.ProcessIn],
     time_count:int
 ) -> dict:
     if is_overhead:
@@ -144,24 +153,3 @@ def create_cicle_data(
             }
     
 
-if __name__ =="__main__":
-    config=config_model.ConfigIn(
-        scale_algorithm="FIFO",
-        quantum=2,
-        overchage=0
-    )
-    p1 = process.ProcessIn(
-        name="1",
-        arrival_time=0,
-        execution_time=2,
-        deadline=0
-    )
-    p2 = process.ProcessIn(
-        name="2",
-        arrival_time=0,
-        execution_time=1,
-        deadline=0
-    ) 
-    process_list = [p1,p2]
-    start(config, process_list)
-    print()
