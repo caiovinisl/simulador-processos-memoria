@@ -1,11 +1,9 @@
-from typing import Dict, List, Union
+from typing import Dict, List, Union, Callable
 from collections import deque
 from cpu.models.process import ProcessIn
 from cpu.memory.schemas.memory_real import MemoryReal
 from cpu.memory.schemas.memory_virtual import MemoryVirtual
 from cpu.memory.schemas.page_schema import Page
-from cpu.memory.swap_algorithm.swap_fifo import swap_fifo
-
 
 
 class MMU():
@@ -14,6 +12,7 @@ class MMU():
     memory_real: MemoryReal
     memory_virtual: MemoryVirtual
     special_queue: deque[Page]
+    page_algorithm: Callable
     
 
     def __init__(self,memory_real: MemoryReal, memory_virtual:MemoryVirtual):
@@ -69,7 +68,7 @@ class MMU():
                 self.real_virtual_map[process.name]["uses"] += 1 #Fazer update da tabela hash
                 return True
             else: #Caso a memoria esteja cheia, vamos ao swap!
-
+                real_virtual_map = self.swap(real_virtual_map)
                 pass
 
 
@@ -78,14 +77,7 @@ class MMU():
 
         
         
-        if not self.memory_real.is_memory_full(process.pages):
-            pass
-        else:
-            #SWITCH!
-            swap_fifo()
-            #executar algoritmo para saber qual será a pagina victim
-            pass
-
+       
     def add_to_memory(
         self,
         pages:int,
@@ -98,6 +90,20 @@ class MMU():
             return used_index
         else:
             print("memory full!")
+
+
+    def swap(self, process: ProcessIn):
+        for k in self.real_virtual_map.keys():
+            self.real_virtual_map[k]
+
+        self.page_algorithm()
+
+    def update_special_queue(self,page:Page):
+        index = self.special_queue.index(page)
+        self.special_queue.remove(page)
+
+    def clean_done_process():
+        pass
 
     def init_memory(self, process_list: List[ProcessIn]):
         pass

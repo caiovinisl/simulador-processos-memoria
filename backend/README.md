@@ -8,9 +8,12 @@
 3- Leia essa página https://davidefiocco.github.io/debugging-containers-with-vs-code/#preparing-to-debug-in-the-container
     obs: Não deixe de cliquer no link que direciona para um video-gif (no tópico Preparing to debug in the containerPermalink)
 
-4- Ao selecionar Reopen in Container  Lembrar de selecionar o docker-compose!
+4- Ao selecionar Reopen in Container  Lembrar de selecionar o docker-compose! (!)
+    (!) A manha é que o vscode só esteja vendo a pasta backend
 
 5- Se vc fez tudo certo! já deve ter o launch.json prontinho e já utilizando o vscode dentro do container.
+
+5.5- Adicionar o campo "cwd": "${fileDirname}" no launch.json, para dizer que para o debug, de qual pasta é o working directory
 
 6- Agora só falta vc rodar o código! Vc precisa achar o arquivo app/main.py, o abra e depois aperte f5! 
 

@@ -21,13 +21,14 @@ import asyncio
 
 app = FastAPI()
 
-list_process = []
+list_process: List[Process] = []
 
 #Before it begins, it waits for the current processess to die
 def join_process():
     print("fazendo join!")
     for p in list_process:
-        p.join()
+        # p.join()
+        p.terminate()
     return None
 
 

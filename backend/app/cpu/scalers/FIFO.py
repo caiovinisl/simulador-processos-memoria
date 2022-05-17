@@ -4,12 +4,14 @@ import os, sys
 # result = os.path.split(PARENT)[0]
 # sys.path.append(result)
 from cpu.models.process import ProcessIn
+from collections import deque
 
 
 
-def fifo(process_list:list[ProcessIn]):
-
+def fifo(process_list:list[ProcessIn])-> deque[ProcessIn]:
+    d = deque()
     print('fazendo fifo')
-    process_list2 = [x for x in process_list]
-    return process_list2
+    for x in process_list:
+        d.appendleft(x)
+    return d
 
