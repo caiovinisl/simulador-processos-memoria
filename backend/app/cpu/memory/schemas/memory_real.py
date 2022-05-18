@@ -17,8 +17,8 @@ class MemoryReal:
             space_graph[i] = False # lugar da memoria começa vazio
         return space_graph
 
-    def is_memory_full(self, page_in: int):
-        if page_in > self.current_memory_space:
+    def is_memory_full(self, number_of_page_in: int):
+        if number_of_page_in > self.current_memory_space:
             return True
         return False
     
@@ -29,7 +29,7 @@ class MemoryReal:
                 empty_list.append(i)
         return empty_list
 
-    def add(self,used_index: List[any])-> List[int]:
+    def add(self,used_index:List)-> List[int]:
         for i in range(self.total_memory_pages):
             if not self.space_graph[i]:
                 self.space_graph[i] = True
@@ -38,8 +38,9 @@ class MemoryReal:
         return used_index
       
 
-    def remove(self,index:int):
-        self.space_graph[str(index)] = False
-        self.current_space_occupied -= 1
-
+    def remove(self,index_list:List[int]):
+        for index in index_list:
+            self.space_graph[index] = False
+            self.current_space_occupied -= 1
+            print(f"Removed {index} from real memory")
 

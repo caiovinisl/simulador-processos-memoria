@@ -56,6 +56,7 @@ class MMU():
             ( real_virtual_map.get(process.name, None) ) and\
             ( real_virtual_map[process.name].get("real", None) 
         ):
+            self.real_virtual_map[process.name]["uses"] += 1 #Fazer update da tabela hash
             return True #Tudo certo! o processo já está carregado na memoria
         
         elif True and \
@@ -63,17 +64,29 @@ class MMU():
             ( real_virtual_map[process.name].get("virtual", None)
         ): #O processo não está na memo_real, mas está na memo_virtual
             if not self.memory_real.is_memory_full(process.pages): #caso a memoria real NÃO esteja cheia, alocar o processo
-                real_used_index = self.add_to_memory(process.page,self.memory_real)
-                self.real_virtual_map[process.name]["real"] = real_used_index #Fazer update da tabela hash
+                real_used_indexes = self.add_to_memory(process.page,self.memory_real)
+                self.real_virtual_map[process.name]["real"] = real_used_indexes #Fazer update da tabela hash
                 self.real_virtual_map[process.name]["uses"] += 1 #Fazer update da tabela hash
                 return True
             else: #Caso a memoria esteja cheia, vamos ao swap!
-                real_virtual_map = self.swap(real_virtual_map)
-                pass
+                self.swap(process)
+                
+
+                return True
 
 
-        else:#O processo não tinha sido cadastrado antes!
-            pass
+        else:#O processo não ta nem na memoria real nem na virtual
+            if not self.memory_real.is_memory_full(process.pages): #caso a memoria real NÃO esteja cheia, alocar o processo
+                self.memory_real.add_stack(process)
+                real_used_indexes = self.add_to_memory(process.page,self.memory_real)
+                virtual_used_indexes = self.add_to_memory(process.page,self.memory_virtual)
+
+                self.real_virtual_map[process.name]["real"] = real_used_indexes
+                self.real_virtual_map[process.name]["virtual"] = virtual_used_indexes
+            else:#Caso a memoria real esteja cheia! Vamos de swap dnovo!
+                self.swap(process)
+
+
 
         
         
@@ -84,31 +97,55 @@ class MMU():
         memory: Union[MemoryReal,MemoryVirtual]
     )-> List[int]:
         used_index = []
-        if not memory.is_memory_full(pages):
-            for _ in range(pages): 
-               used_index = memory.add(used_index)
-            return used_index
-        else:
-            print("memory full!")
+        for _ in range(pages): 
+            used_index = memory.add(used_index)
+        return used_index
 
 
     def swap(self, process: ProcessIn):
-        for k in self.real_virtual_map.keys():
-            self.real_virtual_map[k]
 
-        self.page_algorithm()
+        new_p_real_index, old_p_name= self.page_algorithm(
+            self.memory_real,
+            process,
+            self.real_virtual_map)
+
+        #Remove o index do processo antigo da memoria real
+        list_index_to_remove = self.real_virtual_map[old_p_name]["real"]
+        self.memory_real.remove(list_index_to_remove)
+
+        #Atualiza a remoção na hash table
+        self.real_virtual_map[old_p_name]["real"] = None
+        self.real_virtual_map[old_p_name]["uses"] = 0 #Fazer update da tabela hash
+
+        #
+        self.real_virtual_map[process.name]["real"] = new_p_real_index #Fazer update da tabela hash
+        self.real_virtual_map[process.name]["uses"] += 1 #Fazer update da tabela hash
+
+        return True
+         
 
     def update_special_queue(self,page:Page):
         index = self.special_queue.index(page)
         self.special_queue.remove(page)
 
-    def clean_done_process():
-        pass
+    def garbage_collector(self,process_done:List[ProcessIn]):
+        real_virtual_map = self.real_virtual_map
+        for p in process_done:
+            free_real_index = real_virtual_map[p.name]["real"]
+            free_virtual_index = real_virtual_map[p.name]["virtual"]
 
-    def init_memory(self, process_list: List[ProcessIn]):
-        pass
+            self.memory_real.remove(free_real_index)
+            self.memory_virtual.remove(free_virtual_index)
 
-    def init_disk(self, process_list: List[ProcessIn]):
+
+            real_virtual_map[p.name]["real"] = None
+            real_virtual_map[p.name]["virtual"] = None
+            real_virtual_map[p.name]["uses"] = None
+        self.real_virtual_map = real_virtual_map 
+        print("Removed unused processes")
+
+
+    def init_memories(self):
         pass
 
     
