@@ -8,7 +8,7 @@ from collections import deque
 
 
 
-def fifo(process_list:list[ProcessIn])-> deque[ProcessIn]:
+def fifo(process_list:list[ProcessIn],time_count:int=None)-> deque[ProcessIn]:
     d = deque()
     print('fazendo fifo')
     for x in process_list:

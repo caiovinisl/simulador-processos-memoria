@@ -1,24 +1,29 @@
 from typing import Dict, List
+from collections import deque
 
-class MemoryReal:
+class Memory:
     total_memory_pages: int
     current_memory_space: int
     space_graph: Dict[str, bool]
+    process_stack: deque
+    type_name:str
 
-    def __init__(self, total_memory_pages:int= 50):
+    def __init__(self, type_name:str,total_memory_pages:int= 50,):
         self.total_memory_pages = total_memory_pages
         self.space_graph = self.space_initializer()
         self.current_space_occupied = 0
+        self.process_stack = deque()
+        self.type_name = type_name
 
     def space_initializer(self):
-        space_graph = self.space_graph
+        space_graph = {}
         total_memory_pages = range(self.total_memory_pages)
         for i in total_memory_pages:
             space_graph[i] = False # lugar da memoria começa vazio
         return space_graph
 
     def is_memory_full(self, number_of_page_in: int):
-        if number_of_page_in > self.current_memory_space:
+        if number_of_page_in < self.current_space_occupied:
             return True
         return False
     
@@ -29,12 +34,16 @@ class MemoryReal:
                 empty_list.append(i)
         return empty_list
 
-    def add(self,used_index:List)-> List[int]:
+    def add(self,used_index:List,pages:int)-> List[int]:
+        counter=0
         for i in range(self.total_memory_pages):
+            if counter == pages:#se forem alocadas o número de paginas, pare de alocar!
+                break
             if not self.space_graph[i]:
                 self.space_graph[i] = True
                 self.current_space_occupied += 1
                 used_index.append(i)
+                counter+=1
         return used_index
       
 
@@ -44,3 +53,8 @@ class MemoryReal:
             self.current_space_occupied -= 1
             print(f"Removed {index} from real memory")
 
+    def add_stack(self,process):
+        name = process.name
+        if not name in self.process_stack:
+            self.process_stack.appendleft(name)
+        return True

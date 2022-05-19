@@ -8,8 +8,7 @@ from cpu.models import config_model
 from cpu.models import process
 from cpu.configs.config import scalonator_translate,path,file_name, turnover_file_name, swap_translate
 from cpu.driver import json_driver
-from cpu.memory.schemas.memory_real import MemoryReal
-from cpu.memory.schemas.memory_virtual import MemoryVirtual
+from cpu.memory.schemas.memory_real import Memory
 from cpu.memory.mmu import MMU
 
 from time import sleep, time
@@ -31,9 +30,9 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
     
     json_driver.create_file(path=path,file_name=file_name)
 
-    # real_memory = MemoryReal(total_memory_pages=50)
-    # virtual_memory = MemoryVirtual(total_memory_frames=100)
-    # mmu = MMU(real_memory,virtual_memory,page_algorithm)
+    real_memory = Memory("real",total_memory_pages=20)
+    virtual_memory = Memory("virtual",total_memory_pages=100)
+    mmu = MMU(real_memory,virtual_memory,page_algorithm)
     # MMU.initialize(process_list)
 
     # main-loop variables
@@ -60,7 +59,7 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
         if to_enter:
             for ent in to_enter:
                 queue.appendleft(ent)
-            queue: deque[process.ProcessIn] = scalonator_engine(queue)
+            queue: deque[process.ProcessIn] = scalonator_engine(list(queue),time_count)
 
         if len(queue) != 0:
             p = queue.pop() #Dentro do processador
@@ -71,7 +70,7 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
             continue
 
         if p.name != cache_name: #Caso o process não esteja carregado na cache
-            # result = mmu.load_context(p)
+            result = mmu.load_context(p)
             
             is_overhead = True
             if not first:
@@ -99,7 +98,7 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
         
         if not p.is_it_done():
             queue.appendleft(p) 
-            queue: deque = scalonator_engine(list(queue))
+            queue: deque = scalonator_engine(list(queue),time_count)
 
         cicle_data = create_cicle_data(
             0,0,
