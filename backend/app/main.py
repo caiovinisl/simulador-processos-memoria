@@ -1,9 +1,8 @@
 
 #FastAPI
 from multiprocessing import Process
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends,HTTPException
 from typing import List,Optional
-
 
 from cpu.models.config_model import ConfigIn
 from cpu.models.process import ProcessIn
@@ -55,27 +54,35 @@ def start_backend(
 
 @app.get("/cicle/get/{cicle_id}")
 def get_cicle(cicle_id:int)->None:
-    cicle_data = json_driver.read_cicle_id(
-        path=path,
-        file_name=file_name,
-        cicle_id=cicle_id)
-
-    return cicle_data
+    try:
+        cicle_data = json_driver.read_cicle_id(
+            path=path,
+            file_name=file_name,
+            cicle_id=cicle_id)
+    except Exception:
+        raise HTTPException(status_code=404, detail="Item not found")
+    else:
+        return cicle_data
 
 @app.get("/cicle/get/")
 def get_turnover():
-    turnover_0 =  json_driver.read_cicle_id(
-        path=path,
-        file_name=turnover_file_name,
-        cicle_id=0)
-    turnover_1 =  json_driver.read_cicle_id(
-        path=path,
-        file_name=turnover_file_name,
-        cicle_id=1)
-    return {
-        "turnover_mean": turnover_0,
-        "p_tat": turnover_1
-    }
+    try:
+    
+        turnover_0 =  json_driver.read_cicle_id(
+            path=path,
+            file_name=turnover_file_name,
+            cicle_id=0)
+        turnover_1 =  json_driver.read_cicle_id(
+            path=path,
+            file_name=turnover_file_name,
+            cicle_id=1)
+    except Exception:
+        raise HTTPException(status_code=404, detail="404")
+    else:
+        return {
+            "turnover_mean": turnover_0,
+            "p_tat": turnover_1
+        }
 
 @app.delete("/cicle/delete/all")
 def delete_all_cicle():

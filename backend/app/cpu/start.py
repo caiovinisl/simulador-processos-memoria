@@ -67,9 +67,6 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
         else:
             time_count+=1
             # mmu.garbage_collector(done_process)
-            if len(done_process) >= number_process:
-            # mmu.garbage_collector(done_process)
-                break
             continue
 
         if p.name != cache_name: #Caso o process não esteja carregado na cache
