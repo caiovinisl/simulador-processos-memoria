@@ -1,7 +1,6 @@
 
 #For single Docker file use:
-# docker build -t test_fastapi_image . builds the image[dont forget the dot]
-# docker run -d --name fastapi_test_container -p 8000:8000 test_fastapi_image run the Container
+# docker-compose -f docker-compose.local.yml up -d
 
 
 FROM python:3.9
