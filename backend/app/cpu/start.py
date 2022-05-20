@@ -30,9 +30,9 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
     
     json_driver.create_file(path=path,file_name=file_name)
 
-    real_memory = Memory("real",total_memory_pages=20)
-    virtual_memory = Memory("virtual",total_memory_pages=100)
-    mmu = MMU(real_memory,virtual_memory,page_algorithm)
+    # real_memory = Memory("real",total_memory_pages=20)
+    # virtual_memory = Memory("virtual",total_memory_pages=100)
+    # mmu = MMU(real_memory,virtual_memory,page_algorithm)
     # MMU.initialize(process_list)
 
     # main-loop variables
@@ -67,15 +67,18 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
         else:
             time_count+=1
             # mmu.garbage_collector(done_process)
+            if len(done_process) >= number_process:
+            # mmu.garbage_collector(done_process)
+                break
             continue
 
         if p.name != cache_name: #Caso o process não esteja carregado na cache
-            result = mmu.load_context(p)
+            # result = mmu.load_context(p)
             
             is_overhead = True
             if not first:
                 sleep(overhead)
-                time_count+=1
+                time_count+=overhead
             first = False
             
         else:

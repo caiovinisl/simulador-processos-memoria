@@ -12,6 +12,6 @@ def fifo(process_list:list[ProcessIn],time_count:int=None)-> deque[ProcessIn]:
     d = deque()
     print('fazendo fifo')
     for x in process_list:
-        d.appendleft(x)
+        d.append(x)
     return d
 
