@@ -1,14 +1,12 @@
 {
     "1": {
         "process": {
-            "A": {
-                "name": "A",
-                "arrival_time": 0,
-                "execution_time": 4,
-                "deadline": 7,
-                "pages": 10,
-                "already_exec": 2
-            }
+            "name": "A",
+            "arrival_time": 0,
+            "execution_time": 4,
+            "deadline": 7,
+            "pages": 10,
+            "already_exec": 2
         },
         "quantum": 2,
         "overhead": 0,
@@ -21,14 +19,12 @@
     },
     "2": {
         "process": {
-            "A": {
-                "name": "A",
-                "arrival_time": 0,
-                "execution_time": 4,
-                "deadline": 7,
-                "pages": 10,
-                "already_exec": 4
-            }
+            "name": "A",
+            "arrival_time": 0,
+            "execution_time": 4,
+            "deadline": 7,
+            "pages": 10,
+            "already_exec": 4
         },
         "quantum": 2,
         "overhead": 0,
@@ -41,14 +37,12 @@
     },
     "3": {
         "process": {
-            "B": {
-                "name": "B",
-                "arrival_time": 2,
-                "execution_time": 2,
-                "deadline": 5,
-                "pages": 10,
-                "already_exec": 2
-            }
+            "name": "B",
+            "arrival_time": 2,
+            "execution_time": 2,
+            "deadline": 5,
+            "pages": 10,
+            "already_exec": 2
         },
         "quantum": 2,
         "overhead": 0,
@@ -61,14 +55,12 @@
     },
     "4": {
         "process": {
-            "C": {
-                "name": "C",
-                "arrival_time": 4,
-                "execution_time": 1,
-                "deadline": 8,
-                "pages": 10,
-                "already_exec": 1
-            }
+            "name": "C",
+            "arrival_time": 4,
+            "execution_time": 1,
+            "deadline": 8,
+            "pages": 10,
+            "already_exec": 1
         },
         "quantum": 1,
         "overhead": 0,
@@ -81,14 +73,12 @@
     },
     "5": {
         "process": {
-            "D": {
-                "name": "D",
-                "arrival_time": 6,
-                "execution_time": 3,
-                "deadline": 10,
-                "pages": 10,
-                "already_exec": 2
-            }
+            "name": "D",
+            "arrival_time": 6,
+            "execution_time": 3,
+            "deadline": 10,
+            "pages": 10,
+            "already_exec": 2
         },
         "quantum": 2,
         "overhead": 0,
@@ -101,14 +91,12 @@
     },
     "6": {
         "process": {
-            "D": {
-                "name": "D",
-                "arrival_time": 6,
-                "execution_time": 3,
-                "deadline": 10,
-                "pages": 10,
-                "already_exec": 3
-            }
+            "name": "D",
+            "arrival_time": 6,
+            "execution_time": 3,
+            "deadline": 10,
+            "pages": 10,
+            "already_exec": 3
         },
         "quantum": 1,
         "overhead": 0,

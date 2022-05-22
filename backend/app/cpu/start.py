@@ -162,9 +162,7 @@ def create_cicle_data(
     #do something with the arguments
     p_dict = process.dict()
     return {
-                "process":{
-                    process.name:p_dict
-                },
+                "process":p_dict,
                 "quantum":quantum,
                 "overhead":overhead_response,
                 "next_processess":next_processess,
