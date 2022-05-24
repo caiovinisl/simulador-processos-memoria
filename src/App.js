@@ -26,10 +26,20 @@ function App() {
       {processList ? <Gantt tasks={
         [
           {
-            start: new Date(2020, 1, processList.process.A.arrival_time),
-            end: new Date(2020, 1, processList.process.A.arrival_time + processList.process.A.execution_time),
+            start: new Date(2020, 1, processList.started_time), 
+            end: new Date(2020, 1, processList.started_time + processList.time),
             name: 'Processo ' + processList.process.A.name,
-            id: 'Task 0',
+            id: 'task0',
+            type:'task',
+            progress: 100,
+            isDisabled: true,
+            styles: { progressColor: '#ffbb54', progressSelectedColor: '#ff9e0d' },
+          },
+          {
+            start: new Date(2020, 1, processList.started_time + 4), 
+            end: new Date(2020, 1, processList.started_time + processList.time + 4),
+            name: 'Processo ' + processList.process.A.name,
+            id: 'task0',
             type:'task',
             progress: 100,
             isDisabled: true,
