@@ -3,14 +3,18 @@
         "process": {
             "name": "A",
             "arrival_time": 0,
-            "execution_time": 4,
-            "deadline": 7,
+            "execution_time": 10,
+            "deadline": 10,
             "pages": 10,
             "already_exec": 2
         },
         "quantum": 2,
         "overhead": 0,
         "next_processess": [
+            "E",
+            "D",
+            "C",
+            "B",
             "A"
         ],
         "done_in_this_cicle": false,
@@ -21,25 +25,175 @@
         "process": {
             "name": "A",
             "arrival_time": 0,
-            "execution_time": 4,
-            "deadline": 7,
+            "execution_time": 10,
+            "deadline": 10,
             "pages": 10,
             "already_exec": 4
         },
         "quantum": 2,
         "overhead": 0,
         "next_processess": [
-            "B"
+            "E",
+            "D",
+            "C",
+            "B",
+            "A"
         ],
-        "done_in_this_cicle": true,
+        "done_in_this_cicle": false,
         "time": 4,
         "started_time": 2
     },
     "3": {
         "process": {
+            "name": "A",
+            "arrival_time": 0,
+            "execution_time": 10,
+            "deadline": 10,
+            "pages": 10,
+            "already_exec": 6
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "E",
+            "D",
+            "C",
+            "B",
+            "A"
+        ],
+        "done_in_this_cicle": false,
+        "time": 6,
+        "started_time": 4
+    },
+    "4": {
+        "process": {
+            "name": "A",
+            "arrival_time": 0,
+            "execution_time": 10,
+            "deadline": 10,
+            "pages": 10,
+            "already_exec": 8
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "E",
+            "D",
+            "C",
+            "B",
+            "A"
+        ],
+        "done_in_this_cicle": false,
+        "time": 8,
+        "started_time": 6
+    },
+    "5": {
+        "process": {
+            "name": "A",
+            "arrival_time": 0,
+            "execution_time": 10,
+            "deadline": 10,
+            "pages": 10,
+            "already_exec": 10
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "E",
+            "D",
+            "C",
+            "B"
+        ],
+        "done_in_this_cicle": true,
+        "time": 10,
+        "started_time": 8
+    },
+    "6": {
+        "process": {
             "name": "B",
-            "arrival_time": 2,
+            "arrival_time": 0,
+            "execution_time": 6,
+            "deadline": 10,
+            "pages": 10,
+            "already_exec": 2
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "E",
+            "D",
+            "C",
+            "B"
+        ],
+        "done_in_this_cicle": false,
+        "time": 12,
+        "started_time": 10
+    },
+    "7": {
+        "process": {
+            "name": "B",
+            "arrival_time": 0,
+            "execution_time": 6,
+            "deadline": 10,
+            "pages": 10,
+            "already_exec": 4
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "E",
+            "D",
+            "C",
+            "B"
+        ],
+        "done_in_this_cicle": false,
+        "time": 14,
+        "started_time": 12
+    },
+    "8": {
+        "process": {
+            "name": "B",
+            "arrival_time": 0,
+            "execution_time": 6,
+            "deadline": 10,
+            "pages": 10,
+            "already_exec": 6
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "E",
+            "D",
+            "C"
+        ],
+        "done_in_this_cicle": true,
+        "time": 16,
+        "started_time": 14
+    },
+    "9": {
+        "process": {
+            "name": "C",
+            "arrival_time": 0,
             "execution_time": 2,
+            "deadline": 8,
+            "pages": 10,
+            "already_exec": 2
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "E",
+            "D"
+        ],
+        "done_in_this_cicle": true,
+        "time": 18,
+        "started_time": 16
+    },
+    "10": {
+        "process": {
+            "name": "D",
+            "arrival_time": 0,
+            "execution_time": 4,
             "deadline": 5,
             "pages": 10,
             "already_exec": 2
@@ -47,62 +201,99 @@
         "quantum": 2,
         "overhead": 0,
         "next_processess": [
-            "C"
-        ],
-        "done_in_this_cicle": true,
-        "time": 6,
-        "started_time": 4
-    },
-    "4": {
-        "process": {
-            "name": "C",
-            "arrival_time": 4,
-            "execution_time": 1,
-            "deadline": 8,
-            "pages": 10,
-            "already_exec": 1
-        },
-        "quantum": 1,
-        "overhead": 0,
-        "next_processess": [
+            "E",
             "D"
         ],
-        "done_in_this_cicle": true,
-        "time": 7,
-        "started_time": 6
+        "done_in_this_cicle": false,
+        "time": 20,
+        "started_time": 18
     },
-    "5": {
+    "11": {
         "process": {
             "name": "D",
-            "arrival_time": 6,
-            "execution_time": 3,
-            "deadline": 10,
+            "arrival_time": 0,
+            "execution_time": 4,
+            "deadline": 5,
+            "pages": 10,
+            "already_exec": 4
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "E"
+        ],
+        "done_in_this_cicle": true,
+        "time": 22,
+        "started_time": 20
+    },
+    "12": {
+        "process": {
+            "name": "E",
+            "arrival_time": 0,
+            "execution_time": 8,
+            "deadline": 7,
             "pages": 10,
             "already_exec": 2
         },
         "quantum": 2,
         "overhead": 0,
         "next_processess": [
-            "D"
+            "E"
         ],
         "done_in_this_cicle": false,
-        "time": 9,
-        "started_time": 7
+        "time": 24,
+        "started_time": 22
     },
-    "6": {
+    "13": {
         "process": {
-            "name": "D",
-            "arrival_time": 6,
-            "execution_time": 3,
-            "deadline": 10,
+            "name": "E",
+            "arrival_time": 0,
+            "execution_time": 8,
+            "deadline": 7,
             "pages": 10,
-            "already_exec": 3
+            "already_exec": 4
         },
-        "quantum": 1,
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "E"
+        ],
+        "done_in_this_cicle": false,
+        "time": 26,
+        "started_time": 24
+    },
+    "14": {
+        "process": {
+            "name": "E",
+            "arrival_time": 0,
+            "execution_time": 8,
+            "deadline": 7,
+            "pages": 10,
+            "already_exec": 6
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "E"
+        ],
+        "done_in_this_cicle": false,
+        "time": 28,
+        "started_time": 26
+    },
+    "15": {
+        "process": {
+            "name": "E",
+            "arrival_time": 0,
+            "execution_time": 8,
+            "deadline": 7,
+            "pages": 10,
+            "already_exec": 8
+        },
+        "quantum": 2,
         "overhead": 0,
         "next_processess": [],
         "done_in_this_cicle": true,
-        "time": 10,
-        "started_time": 9
+        "time": 30,
+        "started_time": 28
     }
 }
