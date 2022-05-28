@@ -6,9 +6,9 @@ scalonator_translate = {
 }
 
 swap_translate = {
-    "FIFO": swap_fifo,
-
+    "FIFO": swap_fifo
 }
+
 
 path = "cpu/configs"
 file_name = "cicles_log.json"

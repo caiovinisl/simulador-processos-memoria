@@ -3,8 +3,8 @@ from collections import deque
 
 class Memory:
     total_memory_pages: int
-    current_memory_space: int
-    space_graph: Dict[str, bool]
+    current_space_occupied: int
+    space_graph: Dict[int, bool]
     process_stack: deque
     type_name:str
 
@@ -22,8 +22,9 @@ class Memory:
             space_graph[i] = False # lugar da memoria começa vazio
         return space_graph
 
-    def is_memory_full(self, number_of_page_in: int):
-        if number_of_page_in < self.current_space_occupied:
+    def does_it_fit(self, number_of_page_in: int):
+        free_space = self.total_memory_pages - self.current_space_occupied 
+        if free_space >= number_of_page_in:
             return True
         return False
     
@@ -48,10 +49,13 @@ class Memory:
       
 
     def remove(self,index_list:List[int]):
-        for index in index_list:
-            self.space_graph[index] = False
-            self.current_space_occupied -= 1
-            print(f"Removed {index} from real memory")
+        if index_list is None:
+            print("Process is not in memory")
+        else:
+            for index in index_list:
+                self.space_graph[index] = False
+                self.current_space_occupied -= 1
+                print(f"Removed {index} from real memory")
 
     def add_stack(self,process):
         name = process.name

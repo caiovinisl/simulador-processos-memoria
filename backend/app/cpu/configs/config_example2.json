@@ -1,0 +1,46 @@
+{
+    "config":{
+        "scale_algorithm": "FIFO",
+        "page_algorithm": "FIFO",
+        "quantum": 2,
+        "overhead":0
+    },
+    "processes":[
+       
+        {
+            "name":"A",
+            "arrival_time":0,
+            "execution_time":10,
+            "pages":10,
+            "deadline":10
+        },
+        {
+            "name":"B",
+            "arrival_time":0,
+            "execution_time":6,
+            "pages":10,
+            "deadline":10
+        },
+        {
+            "name":"C",
+            "arrival_time":0,
+            "execution_time":2,
+            "pages":10,
+            "deadline":8
+        },
+        {
+            "name":"D",
+            "arrival_time":0,
+            "execution_time":4,
+            "pages":10,
+            "deadline":5
+        },
+        {
+            "name":"E",
+            "arrival_time":0,
+            "execution_time":8,
+            "pages":10,
+            "deadline":7
+        }
+    ]
+}

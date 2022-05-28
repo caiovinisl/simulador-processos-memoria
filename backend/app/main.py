@@ -16,7 +16,6 @@ import uvicorn
 import asyncio
 
 #TODO: Need response models!
-#TODO: Need delete cicle_log data!
 
 app = FastAPI()
 

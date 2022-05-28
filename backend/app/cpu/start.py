@@ -1,7 +1,7 @@
 from distutils.command.build_scripts import first_line_re
 import json
 import re
-from typing import List, Tuple
+from typing import Callable, List, Tuple
 from collections import deque
 
 from cpu.models import config_model
@@ -25,23 +25,21 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
 
     print("###########################")
 
-    scalonator_engine =  scalonator_translate[config.scale_algorithm] 
-    page_algorithm = swap_translate[config.page_algorithm]
+    scalonator_engine: Callable =  scalonator_translate[config.scale_algorithm] 
+    swap_algorithm: Callable = swap_translate[config.page_algorithm]
     
     json_driver.create_file(path=path,file_name=file_name)
 
-    # real_memory = Memory("real",total_memory_pages=20)
-    # virtual_memory = Memory("virtual",total_memory_pages=100)
-    # mmu = MMU(real_memory,virtual_memory,page_algorithm)
-    # MMU.initialize(process_list)
-
+    real_memory = Memory("real",total_memory_pages=10)
+    virtual_memory = Memory("virtual",total_memory_pages=100)
+    mmu = MMU(real_memory,virtual_memory,swap_algorithm)
+    # mmu.initialize(process_list)
     # main-loop variables
     cicle_id = 1
     threshold_quantum = config.quantum
     overhead = config.overhead
     done_process = []
     is_overhead = False
-    cache_name = False
     is_process_done = False
     time_count = 0
     first = True
@@ -64,24 +62,37 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
         if len(queue) != 0:
             p = queue.pop() #Dentro do processador
             started_time = time_count
+            is_process_done = False
+
         else:
             time_count+=1
             # mmu.garbage_collector(done_process)
             continue
 
-        if p.name != cache_name: #Caso o process não esteja carregado na cache
-            # result = mmu.load_context(p)
-            
+        #Retorna True caso precise trocar de contexto!
+        if mmu.load_context(p):
             is_overhead = True
             if not first:
                 sleep(overhead)
                 time_count+=overhead
             first = False
-            
-        else:
+        else: #Retorna False caso o contexto já estava carregado
             is_overhead = False
         is_process_done = False
-        cache_name = p.name
+        
+        # if p.name != cache_name: #Caso o process não esteja carregado na cache
+        #     result = mmu.load_context(p)
+            
+        #     is_overhead = True
+        #     if not first:
+        #         sleep(overhead)
+        #         time_count+=overhead
+        #     first = False
+            
+        # else:
+        #     is_overhead = False
+        # is_process_done = False
+        # cache_name = p.name
         
 
         for quantum in range(1, threshold_quantum+1):
@@ -91,13 +102,15 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
             if p.is_it_done():
                 is_process_done = True
                 done_process.append((p.name,time_count,p.arrival_time))
+                mmu.garbage_collector(p)
+
                 print(f"process={p.name} its done!")
                 break 
         
         #Fora do processador
         
         if not p.is_it_done():
-            queue.appendleft(p) 
+            queue.append(p) 
             queue: deque = scalonator_engine(list(queue),time_count)
 
         cicle_data = create_cicle_data(
@@ -177,10 +190,15 @@ def p_ready_to_enter(
     time_count:int
 )-> List[process.ProcessIn]:
     result = []
-    for index,p in enumerate(process_list):
+
+    process_copy = process_list.copy()
+
+    for p in process_copy:
         if time_count >= p.arrival_time:
             result.append(p)
-            process_list.pop(index)
+            process_list.remove(p)
+
+            # process_list.pop(index)
     return result
         
 
