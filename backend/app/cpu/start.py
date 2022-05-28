@@ -54,9 +54,11 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
             break
 
         to_enter = p_ready_to_enter(process_list,time_count)
+        # print("processos prontos a entrar em " + str(time_count) + ":  " + str(to_enter))
         if to_enter:
             for ent in to_enter:
                 queue.appendleft(ent)
+            # print("processos no escalonador em " + str(time_count) + ":  " + str(queue))
             queue: deque[process.ProcessIn] = scalonator_engine(list(queue),time_count)
 
         if len(queue) != 0:
