@@ -1,8 +1,12 @@
 from cpu.scalers.FIFO import fifo
+from cpu.scalers.SJF import sjf
+from cpu.scalers.RR import rr
 from cpu.memory.swap_algorithm.swap_fifo import swap_fifo
 
 scalonator_translate = {
     "FIFO": fifo,
+    "SJF": sjf,
+    "RR": rr,
 }
 
 swap_translate = {
