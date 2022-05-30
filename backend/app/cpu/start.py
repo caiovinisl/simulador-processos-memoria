@@ -1,7 +1,7 @@
 from distutils.command.build_scripts import first_line_re
 import json
 import re
-from typing import Callable, List, Tuple
+from typing import Callable, List, Tuple, Dict
 from collections import deque
 
 from cpu.models import config_model
@@ -45,6 +45,7 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
     first = True
     queue: deque = deque()
     number_process = len(process_list)
+    real_virtual_map = None
     print("enters main loop!")
 
     while True:
@@ -102,6 +103,9 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
             if p.is_it_done():
                 is_process_done = True
                 done_process.append((p.name,time_count,p.arrival_time))
+                real_virtual_map = mmu.show_real_virtual_map()
+
+                # real_virtual_map = mmu.show_real_virtual_map()
                 mmu.garbage_collector(p)
 
                 print(f"process={p.name} its done!")
@@ -110,6 +114,7 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
         #Fora do processador
         
         if not p.is_it_done():
+            real_virtual_map = mmu.show_real_virtual_map()
             queue.append(p) 
             queue: deque = scalonator_engine(list(queue),time_count)
 
@@ -119,7 +124,8 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
             quantum,is_overhead,
             overhead,is_process_done,
             queue,time_count,
-            started_time
+            started_time,
+            real_virtual_map
         )
 
         json_driver.write(path,file_name,cicle_id,cicle_data=cicle_data)
@@ -163,7 +169,8 @@ def create_cicle_data(
     is_process_done:bool,
     queue:deque[process.ProcessIn],
     time_count:int,
-    started_time:int
+    started_time:int,
+    real_virtual_map: str
 ) -> dict:
     if is_overhead:
         overhead_response = overhead
@@ -174,6 +181,7 @@ def create_cicle_data(
 
     #do something with the arguments
     p_dict = process.dict()
+    memory_map =json.loads(real_virtual_map)
     return {
                 "process":p_dict,
                 "quantum":quantum,
@@ -181,7 +189,8 @@ def create_cicle_data(
                 "next_processess":next_processess,
                 "done_in_this_cicle":is_process_done,
                 "time":time_count,
-                "started_time":started_time
+                "started_time":started_time,
+                "real_virtual_map": memory_map
             }
     
 

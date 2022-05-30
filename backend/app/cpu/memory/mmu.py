@@ -2,7 +2,7 @@ from typing import Dict, List, Union, Callable, Tuple, Set
 from collections import deque
 from cpu.models.process import ProcessIn
 from cpu.memory.schemas.memory_real import Memory
-
+import json
 
 class MMU:
     
@@ -120,7 +120,12 @@ class MMU:
 
 
     def swap(self, process: ProcessIn):
-
+        #Enquanto não tiver espaço, fazer  o swap para ter espaço!
+        
+        #TODO Must teste this approach! It is the correct one!
+        # while not self.memory_real.does_it_fit(process.pages): 
+        #     old_p_name= self.swap_algorithm(
+        #         self.p_order)
         old_p_name= self.swap_algorithm(
             self.p_order)
 
@@ -173,5 +178,7 @@ class MMU:
             self.real_virtual_map = real_virtual_map 
             print(f"Removed processes = {p_name}")
 
-
+    def show_real_virtual_map(self):
+        copy = json.dumps(self.real_virtual_map)
+        return copy
     
