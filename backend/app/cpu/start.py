@@ -100,6 +100,7 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
 
         for quantum in range(1, threshold_quantum+1):
             p.already_exec +=1
+            p.deadline -= 1
             time_count+= 1
             sleep(1)
             if p.is_it_done():
