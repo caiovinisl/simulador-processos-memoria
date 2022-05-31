@@ -123,18 +123,17 @@ class MMU:
         #Enquanto não tiver espaço, fazer  o swap para ter espaço!
         
         #TODO Must teste this approach! It is the correct one!
-        # while not self.memory_real.does_it_fit(process.pages): 
-        #     old_p_name= self.swap_algorithm(
-        #         self.p_order)
-        old_p_name= self.swap_algorithm(
-            self.p_order)
+        while not self.memory_real.does_it_fit(process.pages): 
+            old_p_name= self.swap_algorithm(
+                self.p_order)
+        # old_p_name= self.swap_algorithm(
+            # self.p_order)
 
-
-        #Remove o index do processo antigo da memoria real
-        list_index_to_remove = self.real_virtual_map[old_p_name]["real"]
-        self.memory_real.remove(list_index_to_remove)
-        self.real_virtual_map[old_p_name]["real"] = None
-        self.real_virtual_map[old_p_name]["uses"] = 0
+            #Remove o index do processo antigo da memoria real
+            list_index_to_remove = self.real_virtual_map[old_p_name]["real"]
+            self.memory_real.remove(list_index_to_remove)
+            self.real_virtual_map[old_p_name]["real"] = None
+            self.real_virtual_map[old_p_name]["uses"] = 0
 
         #cadastra o novo processo na memoria
         real_used_indexes = self.add_to_memory(process.pages,self.memory_real)
