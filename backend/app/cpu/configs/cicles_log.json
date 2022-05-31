@@ -1,23 +1,26 @@
 {
     "1": {
         "process": {
-            "name": "A",
+            "name": "C",
             "arrival_time": 0,
-            "execution_time": 4,
-            "deadline": 7,
+            "execution_time": 2,
+            "deadline": 8,
             "pages": 10,
             "already_exec": 2
         },
         "quantum": 2,
         "overhead": 0,
         "next_processess": [
-            "A"
+            "A",
+            "E",
+            "B",
+            "D"
         ],
-        "done_in_this_cicle": false,
+        "done_in_this_cicle": true,
         "time": 2,
         "started_time": 0,
         "real_virtual_map": {
-            "A": {
+            "C": {
                 "real": [
                     0,
                     1,
@@ -48,23 +51,85 @@
     },
     "2": {
         "process": {
-            "name": "A",
+            "name": "D",
             "arrival_time": 0,
             "execution_time": 4,
-            "deadline": 7,
+            "deadline": 5,
+            "pages": 10,
+            "already_exec": 2
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "A",
+            "E",
+            "B",
+            "D"
+        ],
+        "done_in_this_cicle": false,
+        "time": 4,
+        "started_time": 2,
+        "real_virtual_map": {
+            "C": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "D": {
+                "real": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "virtual": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "uses": 0
+            }
+        }
+    },
+    "3": {
+        "process": {
+            "name": "D",
+            "arrival_time": 0,
+            "execution_time": 4,
+            "deadline": 5,
             "pages": 10,
             "already_exec": 4
         },
         "quantum": 2,
         "overhead": 0,
         "next_processess": [
+            "A",
+            "E",
             "B"
         ],
         "done_in_this_cicle": true,
-        "time": 4,
-        "started_time": 2,
+        "time": 6,
+        "started_time": 4,
         "real_virtual_map": {
-            "A": {
+            "C": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "D": {
                 "real": [
                     0,
                     1,
@@ -93,87 +158,37 @@
             }
         }
     },
-    "3": {
+    "4": {
         "process": {
             "name": "B",
-            "arrival_time": 2,
-            "execution_time": 2,
-            "deadline": 5,
+            "arrival_time": 0,
+            "execution_time": 6,
+            "deadline": 10,
             "pages": 10,
             "already_exec": 2
         },
         "quantum": 2,
         "overhead": 0,
         "next_processess": [
-            "C"
+            "A",
+            "E",
+            "B"
         ],
-        "done_in_this_cicle": true,
-        "time": 6,
-        "started_time": 4,
-        "real_virtual_map": {
-            "A": {
-                "real": null,
-                "virtual": null,
-                "uses": 0
-            },
-            "B": {
-                "real": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9
-                ],
-                "virtual": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9
-                ],
-                "uses": 0
-            }
-        }
-    },
-    "4": {
-        "process": {
-            "name": "C",
-            "arrival_time": 4,
-            "execution_time": 1,
-            "deadline": 8,
-            "pages": 10,
-            "already_exec": 1
-        },
-        "quantum": 1,
-        "overhead": 0,
-        "next_processess": [
-            "D"
-        ],
-        "done_in_this_cicle": true,
-        "time": 7,
+        "done_in_this_cicle": false,
+        "time": 8,
         "started_time": 6,
         "real_virtual_map": {
-            "A": {
+            "C": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "D": {
                 "real": null,
                 "virtual": null,
                 "uses": 0
             },
             "B": {
-                "real": null,
-                "virtual": null,
-                "uses": 0
-            },
-            "C": {
                 "real": [
                     0,
                     1,
@@ -204,23 +219,146 @@
     },
     "5": {
         "process": {
-            "name": "D",
-            "arrival_time": 6,
-            "execution_time": 3,
+            "name": "B",
+            "arrival_time": 0,
+            "execution_time": 6,
             "deadline": 10,
+            "pages": 10,
+            "already_exec": 4
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "A",
+            "E",
+            "B"
+        ],
+        "done_in_this_cicle": false,
+        "time": 10,
+        "started_time": 8,
+        "real_virtual_map": {
+            "C": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "D": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "B": {
+                "real": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "virtual": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "uses": 1
+            }
+        }
+    },
+    "6": {
+        "process": {
+            "name": "B",
+            "arrival_time": 0,
+            "execution_time": 6,
+            "deadline": 10,
+            "pages": 10,
+            "already_exec": 6
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "A",
+            "E"
+        ],
+        "done_in_this_cicle": true,
+        "time": 12,
+        "started_time": 10,
+        "real_virtual_map": {
+            "C": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "D": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "B": {
+                "real": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "virtual": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "uses": 2
+            }
+        }
+    },
+    "7": {
+        "process": {
+            "name": "E",
+            "arrival_time": 0,
+            "execution_time": 8,
+            "deadline": 7,
             "pages": 10,
             "already_exec": 2
         },
         "quantum": 2,
         "overhead": 0,
         "next_processess": [
-            "D"
+            "A",
+            "E"
         ],
         "done_in_this_cicle": false,
-        "time": 9,
-        "started_time": 7,
+        "time": 14,
+        "started_time": 12,
         "real_virtual_map": {
-            "A": {
+            "C": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "D": {
                 "real": null,
                 "virtual": null,
                 "uses": 0
@@ -230,12 +368,7 @@
                 "virtual": null,
                 "uses": 0
             },
-            "C": {
-                "real": null,
-                "virtual": null,
-                "uses": 0
-            },
-            "D": {
+            "E": {
                 "real": [
                     0,
                     1,
@@ -264,23 +397,31 @@
             }
         }
     },
-    "6": {
+    "8": {
         "process": {
-            "name": "D",
-            "arrival_time": 6,
-            "execution_time": 3,
-            "deadline": 10,
+            "name": "E",
+            "arrival_time": 0,
+            "execution_time": 8,
+            "deadline": 7,
             "pages": 10,
-            "already_exec": 3
+            "already_exec": 4
         },
-        "quantum": 1,
+        "quantum": 2,
         "overhead": 0,
-        "next_processess": [],
-        "done_in_this_cicle": true,
-        "time": 10,
-        "started_time": 9,
+        "next_processess": [
+            "A",
+            "E"
+        ],
+        "done_in_this_cicle": false,
+        "time": 16,
+        "started_time": 14,
         "real_virtual_map": {
-            "A": {
+            "C": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "D": {
                 "real": null,
                 "virtual": null,
                 "uses": 0
@@ -290,12 +431,7 @@
                 "virtual": null,
                 "uses": 0
             },
-            "C": {
-                "real": null,
-                "virtual": null,
-                "uses": 0
-            },
-            "D": {
+            "E": {
                 "real": [
                     0,
                     1,
@@ -321,6 +457,464 @@
                     9
                 ],
                 "uses": 1
+            }
+        }
+    },
+    "9": {
+        "process": {
+            "name": "E",
+            "arrival_time": 0,
+            "execution_time": 8,
+            "deadline": 7,
+            "pages": 10,
+            "already_exec": 6
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "A",
+            "E"
+        ],
+        "done_in_this_cicle": false,
+        "time": 18,
+        "started_time": 16,
+        "real_virtual_map": {
+            "C": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "D": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "B": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "E": {
+                "real": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "virtual": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "uses": 2
+            }
+        }
+    },
+    "10": {
+        "process": {
+            "name": "E",
+            "arrival_time": 0,
+            "execution_time": 8,
+            "deadline": 7,
+            "pages": 10,
+            "already_exec": 8
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "A"
+        ],
+        "done_in_this_cicle": true,
+        "time": 20,
+        "started_time": 18,
+        "real_virtual_map": {
+            "C": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "D": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "B": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "E": {
+                "real": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "virtual": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "uses": 3
+            }
+        }
+    },
+    "11": {
+        "process": {
+            "name": "A",
+            "arrival_time": 0,
+            "execution_time": 10,
+            "deadline": 10,
+            "pages": 10,
+            "already_exec": 2
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "A"
+        ],
+        "done_in_this_cicle": false,
+        "time": 22,
+        "started_time": 20,
+        "real_virtual_map": {
+            "C": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "D": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "B": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "E": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "A": {
+                "real": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "virtual": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "uses": 0
+            }
+        }
+    },
+    "12": {
+        "process": {
+            "name": "A",
+            "arrival_time": 0,
+            "execution_time": 10,
+            "deadline": 10,
+            "pages": 10,
+            "already_exec": 4
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "A"
+        ],
+        "done_in_this_cicle": false,
+        "time": 24,
+        "started_time": 22,
+        "real_virtual_map": {
+            "C": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "D": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "B": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "E": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "A": {
+                "real": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "virtual": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "uses": 1
+            }
+        }
+    },
+    "13": {
+        "process": {
+            "name": "A",
+            "arrival_time": 0,
+            "execution_time": 10,
+            "deadline": 10,
+            "pages": 10,
+            "already_exec": 6
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "A"
+        ],
+        "done_in_this_cicle": false,
+        "time": 26,
+        "started_time": 24,
+        "real_virtual_map": {
+            "C": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "D": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "B": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "E": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "A": {
+                "real": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "virtual": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "uses": 2
+            }
+        }
+    },
+    "14": {
+        "process": {
+            "name": "A",
+            "arrival_time": 0,
+            "execution_time": 10,
+            "deadline": 10,
+            "pages": 10,
+            "already_exec": 8
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "A"
+        ],
+        "done_in_this_cicle": false,
+        "time": 28,
+        "started_time": 26,
+        "real_virtual_map": {
+            "C": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "D": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "B": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "E": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "A": {
+                "real": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "virtual": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "uses": 3
+            }
+        }
+    },
+    "15": {
+        "process": {
+            "name": "A",
+            "arrival_time": 0,
+            "execution_time": 10,
+            "deadline": 10,
+            "pages": 10,
+            "already_exec": 10
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [],
+        "done_in_this_cicle": true,
+        "time": 30,
+        "started_time": 28,
+        "real_virtual_map": {
+            "C": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "D": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "B": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "E": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
+            },
+            "A": {
+                "real": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "virtual": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
+                "uses": 4
             }
         }
     }
