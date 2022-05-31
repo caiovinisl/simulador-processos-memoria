@@ -1,0 +1,52 @@
+{
+    "config":{
+        "scale_algorithm": "RR",
+        "page_algorithm": "FIFO",
+        "quantum": 10,
+        "overhead":0
+    },
+    "processes":[
+        {
+            "name":"p5",
+            "arrival_time":35,
+            "execution_time":5,
+            "pages":10,
+            "deadline":10
+        },
+        {
+            "name":"p4",
+            "arrival_time":21,
+            "execution_time":13,
+            "pages":10,
+            "deadline":10
+        },
+        {
+            "name":"p3",
+            "arrival_time":19,
+            "execution_time":10,
+            "pages":10,
+            "deadline":10
+        },
+        {
+            "name":"p2",
+            "arrival_time":13,
+            "execution_time":75,
+            "pages":10,
+            "deadline":8
+        },
+        {
+            "name":"p1",
+            "arrival_time":5,
+            "execution_time":17,
+            "pages":10,
+            "deadline":5
+        },
+        {
+            "name":"p0",
+            "arrival_time":0,
+            "execution_time":25,
+            "pages":10,
+            "deadline":7
+        }
+    ]
+}

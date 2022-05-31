@@ -60,7 +60,7 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
             for ent in to_enter:
                 queue.appendleft(ent)
             # print("processos no escalonador em " + str(time_count) + ":  " + str(queue))
-            queue: deque[process.ProcessIn] = scalonator_engine(list(queue),time_count)
+            queue: deque[process.ProcessIn] = scalonator_engine(list(queue),time_count=time_count)
 
         if len(queue) != 0:
             p = queue.pop() #Dentro do processador
@@ -74,8 +74,8 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
 
         #Retorna True caso precise trocar de contexto!
         if mmu.load_context(p):
-            is_overhead = True
             if not first:
+                is_overhead = True
                 sleep(overhead)
                 time_count+=overhead
             first = False
@@ -102,7 +102,7 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
             p.already_exec +=1
             p.deadline -= 1
             time_count+= 1
-            sleep(1)
+            sleep(0)
             if p.is_it_done():
                 is_process_done = True
                 done_process.append((p.name,time_count,p.arrival_time))
@@ -118,7 +118,7 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
         if not p.is_it_done():
             real_virtual_map = mmu.show_real_virtual_map()
             queue.append(p) 
-            queue: deque = scalonator_engine(list(queue),time_count)
+            queue: deque = scalonator_engine(list(queue),time_count=time_count)
 
         cicle_data = create_cicle_data(
             0,0,
