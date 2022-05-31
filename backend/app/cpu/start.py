@@ -107,7 +107,6 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
                 done_process.append((p.name,time_count,p.arrival_time))
                 real_virtual_map = mmu.show_real_virtual_map()
 
-                # real_virtual_map = mmu.show_real_virtual_map()
                 mmu.garbage_collector(p)
 
                 print(f"process={p.name} its done!")
