@@ -1,5 +1,5 @@
 from typing import Dict, List, Union, Callable, Tuple, Set
-from collections import deque
+from collections import deque, Counter
 from cpu.models.process import ProcessIn
 from cpu.memory.schemas.memory_real import Memory
 import json
@@ -24,6 +24,7 @@ class MMU:
         self.swap_algorithm = swap_algorithm
         self.p_count = None
         self.p_order = deque()
+        self.counter = Counter()
 
 
     def initialize(self, queue:List[ProcessIn]):
@@ -55,16 +56,15 @@ class MMU:
 
     def load_context(self, process: ProcessIn)-> bool:
         real_virtual_map = self.real_virtual_map
+        self.counter[process.name] +=1
         if not process.name in real_virtual_map:
             self.p_order.appendleft(process.name)
         
-        #|TODO Make add_stack and Count 1 function inside the corresponding swap_algorithm
         
         if True and\
             ( real_virtual_map.get(process.name, None) ) and\
             ( real_virtual_map[process.name].get("real", None) 
         ):
-            self.real_virtual_map[process.name]["uses"] += 1 #Fazer update da tabela hash
             return False #Tudo certo! o processo já está carregado na memoria
             #Não precisa de OVERHEAD
         
@@ -76,7 +76,6 @@ class MMU:
                 real_used_indexes = self.add_to_memory(process.pages,self.memory_real)
 
                 self.real_virtual_map[process.name]["real"] = real_used_indexes #Fazer update da tabela hash
-                self.real_virtual_map[process.name]["uses"] += 1 #Fazer update da tabela hash
                 return True
             else: #Caso a memoria esteja cheia, vamos ao swap!
                 self.swap(process)
@@ -93,7 +92,6 @@ class MMU:
                 self.real_virtual_map[process.name] = {}
                 self.real_virtual_map[process.name]["real"] = real_used_indexes
                 self.real_virtual_map[process.name]["virtual"] = virtual_used_indexes
-                self.real_virtual_map[process.name]["uses"] = 0
                 return True
 
             else:#Caso a memoria real esteja cheia! Vamos de swap dnovo!
@@ -101,7 +99,6 @@ class MMU:
                 self.real_virtual_map[process.name] = {}
                 self.real_virtual_map[process.name]["real"] = None
                 self.real_virtual_map[process.name]["virtual"] = virtual_used_indexes
-                self.real_virtual_map[process.name]["uses"] = 0 
                 self.swap(process)
                 return True
 
@@ -122,23 +119,23 @@ class MMU:
     def swap(self, process: ProcessIn):
         #Enquanto não tiver espaço, fazer  o swap para ter espaço!
         
-        #TODO Must teste this approach! It is the correct one!
+        removed_p_count = 1
         while not self.memory_real.does_it_fit(process.pages): 
             old_p_name= self.swap_algorithm(
-                self.p_order)
-        # old_p_name= self.swap_algorithm(
-            # self.p_order)
+                self.p_order, self.counter,removed_p_count)
 
             #Remove o index do processo antigo da memoria real
             list_index_to_remove = self.real_virtual_map[old_p_name]["real"]
             self.memory_real.remove(list_index_to_remove)
             self.real_virtual_map[old_p_name]["real"] = None
-            self.real_virtual_map[old_p_name]["uses"] = 0
+            self.counter[old_p_name] = 0
 
-        #cadastra o novo processo na memoria
+            removed_p_count+=1
+
+        #cadastra o novo processo na memoria real
         real_used_indexes = self.add_to_memory(process.pages,self.memory_real)
         self.real_virtual_map[process.name]["real"] = real_used_indexes 
-        self.real_virtual_map[process.name]["uses"] = 0 
+        self.counter[process.name] = 0 
 
         return True
          
@@ -175,9 +172,14 @@ class MMU:
             real_virtual_map[p_name]["virtual"] = None
             real_virtual_map[p_name]["uses"] = 0
             self.real_virtual_map = real_virtual_map 
+
+            self.counter[p_name] = 0
             print(f"Removed processes = {p_name}")
 
     def show_real_virtual_map(self):
         copy = json.dumps(self.real_virtual_map)
         return copy
-    
+
+    def show_counter(self):
+        copy = json.dumps(dict(self.counter))
+        return copy

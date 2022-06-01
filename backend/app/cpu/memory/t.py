@@ -1,11 +1,12 @@
-from collections import deque
+from collections import Counter
 
-d = deque()
+d = Counter()
 
-d.appendleft("a")
-d.appendleft("b")
-d.appendleft("c")
-d.appendleft("d")
+d[0]+=1
+d[0]+=1
+d[1]+=1
+d[1]+=1
+d[1]+=1
 
 print()
 

@@ -46,6 +46,7 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
     queue: deque = deque()
     number_process = len(process_list)
     real_virtual_map = None
+    mmu_counter = ""
     print("enters main loop!")
 
     while True:
@@ -83,19 +84,7 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
             is_overhead = False
         is_process_done = False
         
-        # if p.name != cache_name: #Caso o process não esteja carregado na cache
-        #     result = mmu.load_context(p)
-            
-        #     is_overhead = True
-        #     if not first:
-        #         sleep(overhead)
-        #         time_count+=overhead
-        #     first = False
-            
-        # else:
-        #     is_overhead = False
-        # is_process_done = False
-        # cache_name = p.name
+
         
 
         for quantum in range(1, threshold_quantum+1):
@@ -107,7 +96,7 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
                 is_process_done = True
                 done_process.append((p.name,time_count,p.arrival_time))
                 real_virtual_map = mmu.show_real_virtual_map()
-
+                
                 mmu.garbage_collector(p)
 
                 print(f"process={p.name} its done!")
@@ -120,6 +109,7 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
             queue.append(p) 
             queue: deque = scalonator_engine(list(queue),time_count=time_count)
 
+        mmu_counter = mmu.show_counter()
         cicle_data = create_cicle_data(
             0,0,
             0,p,
@@ -127,7 +117,8 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
             overhead,is_process_done,
             queue,time_count,
             started_time,
-            real_virtual_map
+            real_virtual_map,
+            mmu_counter
         )
 
         json_driver.write(path,file_name,cicle_id,cicle_data=cicle_data)
@@ -172,7 +163,8 @@ def create_cicle_data(
     queue:deque[process.ProcessIn],
     time_count:int,
     started_time:int,
-    real_virtual_map: str
+    real_virtual_map: str,
+    mmu_counter:str
 ) -> dict:
     if is_overhead:
         overhead_response = overhead
@@ -183,6 +175,7 @@ def create_cicle_data(
 
     #do something with the arguments
     p_dict = process.dict()
+    memory_counter=json.loads(mmu_counter)
     memory_map =json.loads(real_virtual_map)
     return {
                 "process":p_dict,
@@ -192,7 +185,8 @@ def create_cicle_data(
                 "done_in_this_cicle":is_process_done,
                 "time":time_count,
                 "started_time":started_time,
-                "real_virtual_map": memory_map
+                "real_virtual_map": memory_map,
+                "memory_counter":memory_counter
             }
     
 
