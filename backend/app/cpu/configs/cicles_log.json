@@ -50,24 +50,35 @@
     },
     "2": {
         "process": {
-            "name": "B",
-            "arrival_time": 2,
-            "execution_time": 2,
+            "name": "A",
+            "arrival_time": 0,
+            "execution_time": 4,
             "deadline": 3,
             "pages": 10,
-            "already_exec": 2
+            "already_exec": 4
         },
         "quantum": 2,
-        "overhead": 1,
+        "overhead": 0,
         "next_processess": [
-            "A"
+            "B"
         ],
         "done_in_this_cicle": true,
-        "time": 5,
+        "time": 4,
         "started_time": 2,
         "real_virtual_map": {
             "A": {
-                "real": null,
+                "real": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                ],
                 "virtual": [
                     0,
                     1,
@@ -80,6 +91,34 @@
                     8,
                     9
                 ]
+            }
+        },
+        "memory_counter": {
+            "A": 0
+        }
+    },
+    "3": {
+        "process": {
+            "name": "B",
+            "arrival_time": 2,
+            "execution_time": 2,
+            "deadline": 3,
+            "pages": 10,
+            "already_exec": 2
+        },
+        "quantum": 2,
+        "overhead": 0,
+        "next_processess": [
+            "C"
+        ],
+        "done_in_this_cicle": true,
+        "time": 6,
+        "started_time": 4,
+        "real_virtual_map": {
+            "A": {
+                "real": null,
+                "virtual": null,
+                "uses": 0
             },
             "B": {
                 "real": [
@@ -95,16 +134,16 @@
                     9
                 ],
                 "virtual": [
-                    10,
-                    11,
-                    12,
-                    13,
-                    14,
-                    15,
-                    16,
-                    17,
-                    18,
-                    19
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
                 ]
             }
         },
@@ -113,7 +152,7 @@
             "B": 0
         }
     },
-    "3": {
+    "4": {
         "process": {
             "name": "C",
             "arrival_time": 4,
@@ -123,28 +162,18 @@
             "already_exec": 1
         },
         "quantum": 1,
-        "overhead": 1,
+        "overhead": 0,
         "next_processess": [
-            "A"
+            "D"
         ],
         "done_in_this_cicle": true,
         "time": 7,
-        "started_time": 5,
+        "started_time": 6,
         "real_virtual_map": {
             "A": {
                 "real": null,
-                "virtual": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9
-                ]
+                "virtual": null,
+                "uses": 0
             },
             "B": {
                 "real": null,
@@ -165,16 +194,16 @@
                     9
                 ],
                 "virtual": [
-                    10,
-                    11,
-                    12,
-                    13,
-                    14,
-                    15,
-                    16,
-                    17,
-                    18,
-                    19
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
                 ]
             }
         },
@@ -184,7 +213,7 @@
             "C": 0
         }
     },
-    "4": {
+    "5": {
         "process": {
             "name": "D",
             "arrival_time": 6,
@@ -194,29 +223,18 @@
             "already_exec": 2
         },
         "quantum": 2,
-        "overhead": 1,
+        "overhead": 0,
         "next_processess": [
-            "D",
-            "A"
+            "D"
         ],
         "done_in_this_cicle": false,
-        "time": 10,
+        "time": 9,
         "started_time": 7,
         "real_virtual_map": {
             "A": {
                 "real": null,
-                "virtual": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9
-                ]
+                "virtual": null,
+                "uses": 0
             },
             "B": {
                 "real": null,
@@ -242,16 +260,16 @@
                     9
                 ],
                 "virtual": [
-                    10,
-                    11,
-                    12,
-                    13,
-                    14,
-                    15,
-                    16,
-                    17,
-                    18,
-                    19
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
                 ]
             }
         },
@@ -260,83 +278,6 @@
             "B": 0,
             "C": 0,
             "D": 1
-        }
-    },
-    "5": {
-        "process": {
-            "name": "A",
-            "arrival_time": 0,
-            "execution_time": 4,
-            "deadline": 3,
-            "pages": 10,
-            "already_exec": 4
-        },
-        "quantum": 2,
-        "overhead": 1,
-        "next_processess": [
-            "D"
-        ],
-        "done_in_this_cicle": true,
-        "time": 13,
-        "started_time": 10,
-        "real_virtual_map": {
-            "A": {
-                "real": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9
-                ],
-                "virtual": [
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9
-                ]
-            },
-            "B": {
-                "real": null,
-                "virtual": null,
-                "uses": 0
-            },
-            "C": {
-                "real": null,
-                "virtual": null,
-                "uses": 0
-            },
-            "D": {
-                "real": null,
-                "virtual": [
-                    10,
-                    11,
-                    12,
-                    13,
-                    14,
-                    15,
-                    16,
-                    17,
-                    18,
-                    19
-                ]
-            }
-        },
-        "memory_counter": {
-            "A": 0,
-            "B": 0,
-            "C": 0,
-            "D": 0
         }
     },
     "6": {
@@ -349,11 +290,11 @@
             "already_exec": 3
         },
         "quantum": 1,
-        "overhead": 1,
+        "overhead": 0,
         "next_processess": [],
         "done_in_this_cicle": true,
-        "time": 15,
-        "started_time": 13,
+        "time": 10,
+        "started_time": 9,
         "real_virtual_map": {
             "A": {
                 "real": null,
@@ -384,16 +325,16 @@
                     9
                 ],
                 "virtual": [
-                    10,
-                    11,
-                    12,
-                    13,
-                    14,
-                    15,
-                    16,
-                    17,
-                    18,
-                    19
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
                 ]
             }
         },

@@ -55,7 +55,7 @@ class Memory:
             for index in index_list:
                 self.space_graph[index] = False
                 self.current_space_occupied -= 1
-                print(f"Removed {index} from real memory")
+                # print(f"Removed {index} from real memory")
 
     def add_stack(self,process):
         name = process.name

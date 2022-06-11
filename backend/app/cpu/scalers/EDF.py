@@ -10,7 +10,7 @@ from collections import deque
 
 def edf(process_list:list[ProcessIn],time_count:int=None)-> deque[ProcessIn]:
     d = deque()
-    print('fazendo edf')
+    # print('fazendo edf')
     process_list.sort(key=lambda x: x.deadline, reverse=True)
     for x in process_list:
         d.append(x)

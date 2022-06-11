@@ -12,10 +12,7 @@ from cpu.memory.schemas.memory_real import Memory
 from cpu.memory.mmu import MMU
 
 from time import sleep, time
-
-#TODO: need cicle_data model
-#TODO: Need memory logic!
-#TODO: Need to comment code
+import pprint
 
 def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
 
@@ -30,7 +27,7 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
     
     json_driver.create_file(path=path,file_name=file_name)
 
-    real_memory = Memory("real",total_memory_pages=10)
+    real_memory = Memory("real",total_memory_pages=50)
     virtual_memory = Memory("virtual",total_memory_pages=100)
     mmu = MMU(real_memory,virtual_memory,swap_algorithm)
     # mmu.initialize(process_list)
@@ -91,7 +88,7 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
             p.already_exec +=1
             p.deadline -= 1
             time_count+= 1
-            sleep(0)
+            sleep(4)
             if p.is_it_done():
                 is_process_done = True
                 done_process.append((p.name,time_count,p.arrival_time))
@@ -122,6 +119,10 @@ def start(config:config_model.ConfigIn, process_list:List[process.ProcessIn]):
         )
 
         json_driver.write(path,file_name,cicle_id,cicle_data=cicle_data)
+        print("-------------------------------------------------------------")
+        pprint.pprint(cicle_data)
+        print("-------------------------------------------------------------")
+        print("Next Cicle! \n\n")
         cicle_id+=1
 
 

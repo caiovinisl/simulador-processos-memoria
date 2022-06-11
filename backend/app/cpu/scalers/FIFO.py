@@ -11,7 +11,7 @@ from typing import Union, List
 
 def fifo(process_list:list[ProcessIn],time_count:int=None)-> deque[ProcessIn]:
     d = deque()
-    print('fazendo fifo')
+    # print('fazendo fifo')
     for x in process_list:
         d.append(x)
     return d

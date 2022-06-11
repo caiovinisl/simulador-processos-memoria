@@ -11,7 +11,7 @@ from typing import Union, List
 
 def rr_v1(process_list:list[ProcessIn],time_count:int=None)-> deque[ProcessIn]:
     d = deque()
-    print('fazendo rr')
+    # print('fazendo rr')
     d.append(process_list[len(process_list) - 1])
     for x in range(len(process_list)-2):
         d.append(process_list[x])
