@@ -7,42 +7,42 @@
     },
     "processes":[
         {
-            "name":"p5",
+            "name":"A",
             "arrival_time":35,
             "execution_time":5,
             "pages":10,
             "deadline":10
         },
         {
-            "name":"p4",
+            "name":"B",
             "arrival_time":21,
             "execution_time":13,
             "pages":10,
             "deadline":10
         },
         {
-            "name":"p3",
+            "name":"C",
             "arrival_time":19,
             "execution_time":10,
             "pages":10,
             "deadline":10
         },
         {
-            "name":"p2",
+            "name":"D",
             "arrival_time":13,
             "execution_time":75,
             "pages":10,
             "deadline":8
         },
         {
-            "name":"p1",
+            "name":"E",
             "arrival_time":5,
             "execution_time":17,
             "pages":10,
             "deadline":5
         },
         {
-            "name":"p0",
+            "name":"F",
             "arrival_time":0,
             "execution_time":25,
             "pages":10,

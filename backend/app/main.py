@@ -3,7 +3,7 @@
 from multiprocessing import Process
 from fastapi import FastAPI, Depends,HTTPException
 from typing import List,Optional
-
+from fastapi.middleware.cors import CORSMiddleware
 from cpu.models.config_model import ConfigIn
 from cpu.models.process import ProcessIn
 from cpu.start import start
@@ -18,6 +18,19 @@ import asyncio
 #TODO: Need response models!
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:8030",
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 list_process: List[Process] = []
 
